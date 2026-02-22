@@ -1,6 +1,6 @@
 TestForZMedia — Tiny Army Battle Simulator
 📸 Скриншоты
-![Главное меню](Main menu.jpg)
+![Главное меню](/Main menu.jpg)
 ![Бой]()
 ![Победа]()
 ![Log]()
