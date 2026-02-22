@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ScaleConfigSO
   DebugScaleId: SCALE_BIG
   SCALE: 1.5
-  HP_MOD: 0
+  HP_MOD: 50
   ATK_MOD: 0
   SPEED_MOD: 0
   ATKSPD_MOD: 0

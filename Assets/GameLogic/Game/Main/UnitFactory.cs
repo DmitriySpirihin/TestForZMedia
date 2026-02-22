@@ -11,12 +11,14 @@ public class UnitFactory
         _container = container;
     }
 
-    public UnitView Create(UnitData data, Vector3 position, Quaternion rotation)
+    public UnitView Create(UnitData data, Vector3 position, Quaternion rotation, Vector3 armyCenter)
     {
         var prefab = data.ShapeConfig.SHAPE_PREFAB;
         
-        var instance = _container.InstantiatePrefabForComponent<UnitView>( prefab, position, rotation, null);
-        instance.Initialize(data);
+        // make gameobject via zenject
+        var instance = _container.InstantiatePrefabForComponent<UnitView>( prefab,  position,  rotation,  null);
+        
+        instance.Initialize(data, armyCenter);
         
         return instance;
     }

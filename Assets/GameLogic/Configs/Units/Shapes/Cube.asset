@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Cube
   m_EditorClassIdentifier: Assembly-CSharp::ShapeConfigSO
   DebugId: SHAPE_CUBE
-  SHAPE_PREFAB: {fileID: 9089226021711798754, guid: e562636a42536bc43802f1677c642903, type: 3}
-  HP_MOD: 0
-  ATK_MOD: 0
+  SHAPE_PREFAB: {fileID: 8665736226348427527, guid: e562636a42536bc43802f1677c642903, type: 3}
+  HP_MOD: 100
+  ATK_MOD: 10
   SPEED_MOD: 0
   ATKSPD_MOD: 0

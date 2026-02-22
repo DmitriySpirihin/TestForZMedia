@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Sphere
   m_EditorClassIdentifier: Assembly-CSharp::ShapeConfigSO
   DebugId: SHAPE_SPHERE
-  SHAPE_PREFAB: {fileID: 4336582986682300742, guid: 64d1e378123c08149a7483aabf9928e1, type: 3}
-  HP_MOD: 0
-  ATK_MOD: 0
+  SHAPE_PREFAB: {fileID: 4880573510544444338, guid: 64d1e378123c08149a7483aabf9928e1, type: 3}
+  HP_MOD: 50
+  ATK_MOD: 20
   SPEED_MOD: 0
   ATKSPD_MOD: 0

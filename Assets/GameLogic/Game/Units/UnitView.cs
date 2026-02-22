@@ -1,6 +1,5 @@
 using UnityEngine;
 using Zenject;
-using UniRx;
 
 public class UnitView : MonoBehaviour
 {
@@ -10,55 +9,46 @@ public class UnitView : MonoBehaviour
     private IHealth _health;
     private UnitAttack _attack;
     private UnitMove _movement;
+    
+    // army center
+    private Vector3 _armyCenter;
 
-    public void Initialize(UnitData data)
+    public void Initialize(UnitData data, Vector3 armyCenter)
     {
         _data = data;
-        // register this in dictionary for targeting
-        _battleManager.RegisterUnit(this, data);
+        _armyCenter = armyCenter;
         _health = GetComponent<IHealth>();
         _health?.Init(_data);
         _attack = GetComponent<UnitAttack>();
         _attack?.Init(data);
         _movement = GetComponent<UnitMove>();
         _movement?.Init(data);
-        SetupSubscriptions();
     }
 
-    // Visual settings
     public void ApplyVisualConfig()
     {
-        //Material
         var renderer = GetComponent<Renderer>();
         var mpb = new MaterialPropertyBlock();
         renderer.GetPropertyBlock(mpb);
-        mpb.SetColor("_Color", _data.ColorConfig.COLOR);
+        mpb.SetColor("_BaseColor", _data.ColorConfig.COLOR);
         renderer.SetPropertyBlock(mpb);
         
-        // Scale
         transform.localScale = Vector3.one * _data.ScaleConfig.SCALE;
 
-        float rotationY = (_data.ArmyType == GameEnums.ArmyType.ArmyA) ? 0f : 180f;
+        float rotationY = (_data.Army == GameEnums.ArmyType.ArmyA) ? 0f : 180f;
         transform.rotation = Quaternion.Euler(0f, rotationY, 0f);
-        ChangeFormation();
+        
     }
 
     public void ChangeFormation()
     {
-        //  position with formation offset by index as Id
-        float offsetX = _battleManager._armyFormations[_data.ArmyType].FORMATION_OFFSETS?[_data.Id].x?? 0f;
-        float offsetZ = _battleManager._armyFormations[_data.ArmyType].FORMATION_OFFSETS?[_data.Id].y?? 0f;
-        transform.position = new Vector3(offsetX, transform.position.y, offsetZ);
-    }
-
-    //Just for future functionality
-    private void SetupSubscriptions()
-    {
-        _health?.State.Where(state => state == GameEnums.HealthState.Dead).Take(1).Subscribe(_ => OnUnitDied()).AddTo(this);
-    }
-
-    private void OnUnitDied()
-    {
-        //Here we can add some vfx for the game
+        // get current formation
+        var formation = _battleManager.GetFormation(_data.Army);
+        Vector2 offset = Vector2.zero;
+        
+        if (formation != null && formation.FORMATION_OFFSETS != null && _data.Id < formation.FORMATION_OFFSETS.Length) offset = formation.FORMATION_OFFSETS[_data.Id];
+        
+        // apply offset to position
+        transform.position = _armyCenter + new Vector3(offset.x, 0f, offset.y);
     }
 }

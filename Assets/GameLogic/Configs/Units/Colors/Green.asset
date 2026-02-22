@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ColorConfigSO
   DebugColorId: COLOR_GREEN
   COLOR: {r: 0.3679244, g: 1, b: 0.48363015, a: 1}
-  HP_MOD: 0
-  ATK_MOD: 0
-  SPEED_MOD: 0
+  HP_MOD: -100
+  ATK_MOD: 20
+  SPEED_MOD: -5
   ATKSPD_MOD: 0

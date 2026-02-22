@@ -29,7 +29,7 @@ public class UnitAttack : MonoBehaviour, IAttack
     public void Init(UnitData data)
     {
         _id = data.Id;
-        _army = data.ArmyType;
+        _army = data.Army;
         _atk = data.ATK;
         _atkspd = data.ATKSPD;
     }

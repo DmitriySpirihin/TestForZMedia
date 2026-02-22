@@ -7,7 +7,7 @@ public struct UnitData
 {
     // id
     public int Id;
-    public ArmyType ArmyType;
+    public ArmyType Army;
     
     // stats
     public float CurrentHP;
@@ -31,7 +31,7 @@ public struct UnitData
     public UnitData(int id, ArmyType armyType,  float hp, float atk, float speed, float atkspd, Vector2 formationOffset, ShapeConfigSO shapeConfig, ColorConfigSO colorConfig, ScaleConfigSO scaleConfig)
     {
         Id = id;
-        ArmyType = armyType;
+        Army = armyType;
         MaxHP = hp;
         CurrentHP = hp;
         ATK = atk;

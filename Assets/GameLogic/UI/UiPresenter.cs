@@ -10,24 +10,27 @@ public class UiPresenter : MonoBehaviour
     [Inject] private ArmySpawner _armySpawner;
     [Inject] private FormationConfigSO[] _allFormations;
 
-    [Header("=== Panels ===")]
+    [Header("Panels")]
     [SerializeField] private GameObject _mainMenuPanel;
     [SerializeField] private GameObject _runningPanel;
     [SerializeField] private GameObject _finishedPanel;
 
-    [Header("=== Main Menu ===")]
+    [Header("Main Menu")]
+    [SerializeField] private UnityEngine.UI.Button _btnRespawnA;
+    [SerializeField] private UnityEngine.UI.Button _btnRespawnB;
     [SerializeField] private UnityEngine.UI.Button _btnFormationA;
     [SerializeField] private UnityEngine.UI.Button _btnFormationB;
     [SerializeField] private UnityEngine.UI.Button _btnStartGame;
     [SerializeField] private TextMeshProUGUI _txtFormationA;
     [SerializeField] private TextMeshProUGUI _txtFormationB;
 
-    [Header("=== Running ===")]
+    [Header("Running")]
     [SerializeField] private TextMeshProUGUI _txtArmyAAlive;
     [SerializeField] private TextMeshProUGUI _txtArmyBAlive;
 
-    [Header("=== Finished ===")]
+    [Header("Finished")]
     [SerializeField] private TextMeshProUGUI _txtWinner;
+    [SerializeField] private TextMeshProUGUI _txtStatistics;
     [SerializeField] private UnityEngine.UI.Button _btnRestart;
 
     // State
@@ -40,12 +43,16 @@ public class UiPresenter : MonoBehaviour
         // btns
         _btnFormationA?.onClick.AddListener(() => CycleFormation(ArmyType.ArmyA));
         _btnFormationB?.onClick.AddListener(() => CycleFormation(ArmyType.ArmyB));
+        _btnRespawnA?.onClick.AddListener(() => _armySpawner.SpawnArmy(ArmyType.ArmyA));
+        _btnRespawnB?.onClick.AddListener(() => _armySpawner.SpawnArmy(ArmyType.ArmyB));
         _btnStartGame?.onClick.AddListener(OnStartGame);
         _btnRestart?.onClick.AddListener(OnRestart);
         
-        _battleManager.Gamestate.DistinctUntilChanged().Subscribe(OnGameStateChange).AddTo(_disposables);
-        
-        SetPanelActive(_mainMenuPanel);
+        _battleManager.Gamestate.Where(v => v == GameState.Finished).Subscribe(_ => SetFinishPanel()).AddTo(_disposables);
+        CycleFormation(ArmyType.ArmyA);
+        CycleFormation(ArmyType.ArmyB);
+        _armySpawner.SpawnArmy(ArmyType.ArmyA);
+        _armySpawner.SpawnArmy(ArmyType.ArmyB);
         UpdateFormationLabels();
     }
 
@@ -59,7 +66,7 @@ public class UiPresenter : MonoBehaviour
             var newFormation = _allFormations[_formationIndexA];
             
             _battleManager.SetFormation(ArmyType.ArmyA, newFormation);
-            _txtFormationA.text = $"Form A: {newFormation.name}";
+            _txtFormationA.text = $"Formation: {newFormation.name}";
         }
         else
         {
@@ -67,7 +74,7 @@ public class UiPresenter : MonoBehaviour
             var newFormation = _allFormations[_formationIndexB];
             
             _battleManager.SetFormation(ArmyType.ArmyB, newFormation);
-            _txtFormationB.text = $"Form B: {newFormation.name}";
+            _txtFormationB.text = $"Formation: {newFormation.name}";
         }
     }
 
@@ -75,41 +82,16 @@ public class UiPresenter : MonoBehaviour
     {
         if (_allFormations != null && _allFormations.Length > 0)
         {
-            _txtFormationA.text = $"Form A: {_allFormations[_formationIndexA].name}";
-            _txtFormationB.text = $"Form B: {_allFormations[_formationIndexB].name}";
+            _txtFormationA.text = $"Formation: {_allFormations[_formationIndexA].name}";
+            _txtFormationB.text = $"Formation: {_allFormations[_formationIndexB].name}";
         }
     }
 
-    private void OnGameStateChange(GameState state)
+    private void SetFinishPanel()
     {
-        switch (state)
-        {
-            case GameState.MainMenu:
-                SetPanelActive(_mainMenuPanel);
-                _battleManager.CleanupAll();
-                UpdateFormationLabels();
-            break;
-                
-            case GameState.Running:
-                SetPanelActive(_runningPanel);
-                _battleManager.CleanupAll();
-                _armySpawner.SpawnArmy(ArmyType.ArmyA);
-                _armySpawner.SpawnArmy(ArmyType.ArmyB);
-            break;
-                
-            case GameState.Finished:
-                SetPanelActive(_finishedPanel);
-                ShowWinner(_battleManager.Winners.Value);
-            break;
-        }
-    }
-
-    private void SetPanelActive(GameObject activePanel)
-    {
-        _mainMenuPanel.SetActive(false);
         _runningPanel.SetActive(false);
-        _finishedPanel.SetActive(false);
-        activePanel?.SetActive(true);
+        _finishedPanel.SetActive(true);
+        ShowWinner(_battleManager.Winners.Value);
     }
 
     private void UpdateAliveCounts()
@@ -125,11 +107,16 @@ public class UiPresenter : MonoBehaviour
     private void ShowWinner(ArmyType winner)
     {
         _txtWinner?.SetText(winner == ArmyType.ArmyA ? "Army A Wins!" : "Army B Wins!");
+        _txtStatistics.SetText(
+           $"Total hits : {_battleManager.TotalHits.Value}\nTotal A Army damage : {_battleManager.TotalAArmyDamage.Value}\n Total B Army damage : {_battleManager.TotalBArmyDamage.Value}"
+        );
     }
 
     private void OnStartGame()
     {
         _battleManager.Gamestate.Value = GameState.Running;
+        _mainMenuPanel.SetActive(false);
+        _runningPanel.SetActive(true);
         // update counters
         Observable.EveryUpdate()
             .Where(_ => _battleManager.Gamestate.Value == GameState.Running)
@@ -140,6 +127,11 @@ public class UiPresenter : MonoBehaviour
     private void OnRestart()
     {
         _battleManager.Gamestate.Value = GameState.MainMenu;
+        _battleManager.CleanupAll();
+        _armySpawner.SpawnArmy(ArmyType.ArmyA);
+        _armySpawner.SpawnArmy(ArmyType.ArmyB);
+        _finishedPanel.SetActive(false);
+        _mainMenuPanel.SetActive(true);
     }
 
     private void OnDestroy()
@@ -149,5 +141,7 @@ public class UiPresenter : MonoBehaviour
         _btnFormationB?.onClick.RemoveAllListeners();
         _btnStartGame?.onClick.RemoveAllListeners();
         _btnRestart?.onClick.RemoveAllListeners();
+        _btnRespawnA?.onClick.RemoveAllListeners();
+        _btnRespawnB?.onClick.RemoveAllListeners();
     }
 }

@@ -26,7 +26,7 @@ public class UnitHealth : MonoBehaviour, IHealth
     public void Init(UnitData data)
     {
         _id = data.Id;
-        _army = data.ArmyType;
+        _army = data.Army;
         _maxHealth.Value = Mathf.Max(1f, data.MaxHP);
         _currentHealth.Value = _maxHealth.Value;
         army = _army == ArmyType.ArmyA ? "Army A" : "Army B";
@@ -40,23 +40,27 @@ public class UnitHealth : MonoBehaviour, IHealth
         float validDamage = Mathf.Max(_currentHealth.Value - amount, 0f);
 
         _currentHealth.Value = validDamage;
-
+        //register statistics
+        _battleManager.AddStatistic(_army, validDamage);
         Debug.Log($"Unit: {_id} from army: {army} takes {validDamage} point of damage");
     }
     
     private void OnDeath(float current)
     {
-        if(current > 0)return;
-        _state.Value = HealthState.Dead;
-        _battleManager?.NotifyUnitDied(_army, _id);
-        _disposables?.Dispose(); 
-        Debug.Log($"Unit: {_id} from army: {army} has died");
-        var collider = GetComponent<Collider>();
-        if (collider != null) collider.enabled = false;
-        var renderer = GetComponent<Renderer>();
-        if (renderer != null) renderer.enabled = false;
+       if (current > 0) return;
+    
+       _state.Value = HealthState.Dead;
+       _battleManager?.NotifyUnitDied(_army, _id);
+    
+       _disposables?.Dispose(); 
+    
+       var collider = GetComponent<Collider>();
+       if (collider != null) collider.enabled = false;
+    
+       var renderer = GetComponent<Renderer>();
+       if (renderer != null) renderer.enabled = false;
 
-        Destroy(gameObject, 0.1f);
+       Destroy(gameObject, 0.1f);
     }
     
 }

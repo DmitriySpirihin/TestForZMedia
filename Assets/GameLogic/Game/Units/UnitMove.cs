@@ -27,12 +27,13 @@ public class UnitMove : MonoBehaviour, IMove
     public void Init(UnitData data)
     {
         _id = data.Id;
-        _army = data.ArmyType;
+        _army = data.Army;
         _speed = data.SPEED;
         _attack = GetComponent<UnitAttack>();
         
         // stop is game state is not runnig
         _battleManager.Gamestate.Where(state => state != GameState.Running).Take(1).Subscribe(_ => Stop()).AddTo(_disposables);
+        _battleManager.Gamestate.Where(state => state == GameState.Running).Take(1).Subscribe(_ => FindAndSetTarget(transform.position)).AddTo(_disposables);
     }
 
     // Set target via battle manager
@@ -54,10 +55,8 @@ public class UnitMove : MonoBehaviour, IMove
         _hasTarget = true;
 
         // Give IHealth to attack comp
-        if (targetView.TryGetComponent<IHealth>(out var health))
-            _attack?.SetTarget(health);
-        else
-            Debug.LogWarning($"[UnitMove] Target has no IHealth component (ID: {_id})");
+        if (targetView.TryGetComponent<IHealth>(out var health)) _attack?.SetTarget(health);
+        else Debug.LogWarning($"[UnitMove] Target has no IHealth component (ID: {_id})");
         
         StartMoveLoop();
     }
