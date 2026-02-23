@@ -20,7 +20,7 @@ Shader "Custom/URP_FullLit_Instanced"
             #pragma vertex vert
             #pragma fragment frag
             
-            // 1. CRITICAL: Enable Instancing
+            // Enable multy instancing
             #pragma multi_compile_instancing
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 
@@ -36,7 +36,7 @@ Shader "Custom/URP_FullLit_Instanced"
                 UNITY_VERTEX_INPUT_INSTANCE_ID 
             };
 
-            // 2. Wrap _BaseColor in the Instancing Buffer
+            // 2. Wrap _BaseColor in the instancing buffer
             UNITY_INSTANCING_BUFFER_START(Props)
                 UNITY_DEFINE_INSTANCED_PROP(float4, _BaseColor)
             UNITY_INSTANCING_BUFFER_END(Props)
@@ -54,10 +54,10 @@ Shader "Custom/URP_FullLit_Instanced"
             half4 frag(Varyings input) : SV_Target {
                 UNITY_SETUP_INSTANCE_ID(input);
                 
-                // 3. Access the instanced color
+                // access the instanced color
                 float4 color = UNITY_ACCESS_INSTANCED_PROP(Props, _BaseColor);
                 
-                // Simple Lit Lighting
+                // Simple Lit lighting
                 Light mainLight = GetMainLight();
                 float3 lightColor = mainLight.color * saturate(dot(input.normalWS, mainLight.direction));
                 return half4(color.rgb * (lightColor + 0.2), color.a); // 0.2 is ambient
@@ -65,7 +65,7 @@ Shader "Custom/URP_FullLit_Instanced"
             ENDHLSL
         }
 
-        // 4. ADD THIS: Shadow Caster Pass (Fixes the "Broken" look/shadows)
+        // Shadow сaster pass 
         Pass
         {
             Name "ShadowCaster"
