@@ -1,3 +1,4 @@
+using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 using Zenject;
 
@@ -32,6 +33,13 @@ public class UnitView : MonoBehaviour
         renderer.GetPropertyBlock(mpb);
         mpb.SetColor("_BaseColor", _data.ColorConfig.COLOR);
         renderer.SetPropertyBlock(mpb);
+
+        if (_data.ShapeConfig.DebugId == "SHAPE_CUBE")
+        {
+            Debug.Log(_data.ShapeConfig.DebugId);
+             renderer.rendererPriority = 0;
+        }
+        else renderer.rendererPriority = 1;
         
         transform.localScale = Vector3.one * _data.ScaleConfig.SCALE;
 
