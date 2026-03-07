@@ -28,9 +28,9 @@ public class UnitCreator
         // ATKSPD: if higher than slower > (delay)
         
         float hp = Mathf.Max(1f, _gameConfig.HP + shape.HP_MOD + color.HP_MOD + size.HP_MOD);
-        float atk = _gameConfig.ATK + shape.ATK_MOD + color.ATK_MOD + size.ATK_MOD;
-        float speed = _gameConfig.SPEED + shape.SPEED_MOD + color.SPEED_MOD + size.SPEED_MOD;
-        float atkspd = _gameConfig.ATKSPD + shape.ATKSPD_MOD + color.ATKSPD_MOD + size.ATKSPD_MOD;
+        float atk = Mathf.Max(1f, _gameConfig.ATK + shape.ATK_MOD + color.ATK_MOD + size.ATK_MOD);
+        float speed = Mathf.Max(1f, _gameConfig.SPEED + shape.SPEED_MOD + color.SPEED_MOD + size.SPEED_MOD);
+        float atkspd = Mathf.Max(1f, _gameConfig.ATKSPD + shape.ATKSPD_MOD + color.ATKSPD_MOD + size.ATKSPD_MOD);
 
         return new UnitData(id, army, hp, atk, speed, atkspd, formationOffset, shape, color, size);
     }

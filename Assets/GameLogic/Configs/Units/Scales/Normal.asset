@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25be64255c7c2594fbf90055391126e8, type: 3}
-  m_Name: MainConfig
-  m_EditorClassIdentifier: Assembly-CSharp::GameConfigSO
-  MAX_UNITS_PER_ARMY: 20
-  HP: 100
-  ATK: 10
-  SPEED: 10
-  ATKSPD: 1
+  m_Script: {fileID: 11500000, guid: 74e229852d767f34e82f299aa47f8502, type: 3}
+  m_Name: Normal
+  m_EditorClassIdentifier: Assembly-CSharp::ScaleConfigSO
+  HP_MOD: 0
+  ATK_MOD: 0
+  SPEED_MOD: 0
+  ATKSPD_MOD: 0
+  DebugScaleId: SCALE_NORMAL
+  SCALE: 1.21

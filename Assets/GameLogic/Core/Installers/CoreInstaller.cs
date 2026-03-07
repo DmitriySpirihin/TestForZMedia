@@ -14,6 +14,10 @@ using Zenject;
  
     public override void InstallBindings()
     {
+        
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = -1;
+
         Container.Bind<GameConfigSO>().FromInstance(_gameConfig);
         Container.BindInstance(_shapeConfigs);
         Container.BindInstance(_colorConfigs).AsSingle();

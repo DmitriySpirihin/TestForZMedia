@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d5d69f5b473edc4aa4cecbfff44099c, type: 3}
-  m_Name: Green
+  m_Name: Purple
   m_EditorClassIdentifier: Assembly-CSharp::ColorConfigSO
-  HP_MOD: -45
-  ATK_MOD: -87
-  SPEED_MOD: 11
-  ATKSPD_MOD: 6
-  DebugColorId: COLOR_GREEN
-  COLOR: {r: 0.2845021, g: 0.8616352, b: 0.531689, a: 1}
+  HP_MOD: 200
+  ATK_MOD: -42
+  SPEED_MOD: 8
+  ATKSPD_MOD: 1
+  DebugColorId: COLOR_RED
+  COLOR: {r: 0.7202854, g: 0.16033763, b: 0.7610062, a: 1}

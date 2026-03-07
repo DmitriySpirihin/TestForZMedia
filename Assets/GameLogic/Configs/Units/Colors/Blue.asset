@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 6d5d69f5b473edc4aa4cecbfff44099c, type: 3}
   m_Name: Blue
   m_EditorClassIdentifier: Assembly-CSharp::ColorConfigSO
+  HP_MOD: -38
+  ATK_MOD: 74
+  SPEED_MOD: -8
+  ATKSPD_MOD: 1
   DebugColorId: COLOR_BLUE
-  COLOR: {r: 0.26100624, g: 0.7434637, b: 1, a: 1}
-  HP_MOD: 0
-  ATK_MOD: -15
-  SPEED_MOD: 10
-  ATKSPD_MOD: 4
+  COLOR: {r: 0.3622878, g: 0.6435712, b: 0.8930817, a: 1}

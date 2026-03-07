@@ -3,9 +3,13 @@ using GameEnums;
 using UniRx;
 using System;
 using System.Collections.Generic;
+using Zenject;
+using System.Collections.Specialized;
 
 public class BattleManager : MonoBehaviour
 {
+
+    [Inject]GameConfigSO mainConfigSO;
     // statistics (for UI)
     public readonly ReactiveProperty<float> TotalAArmyDamage = new ReactiveProperty<float>();
     public readonly ReactiveProperty<float> TotalBArmyDamage = new ReactiveProperty<float>();
@@ -19,8 +23,8 @@ public class BattleManager : MonoBehaviour
     private readonly CompositeDisposable _disposables = new CompositeDisposable();
 
     // two armies arrays (logic data)
-    public UnitData[] _armyA = new UnitData[20];
-    public UnitData[] _armyB = new UnitData[20];
+    public UnitData[] _armyA = new UnitData[0];
+    public UnitData[] _armyB = new UnitData[0];
 
     //For fast targeting: tuple key (ArmyType, Id)
     private readonly Dictionary<(ArmyType, int), UnitView> _unitViews = new();
@@ -31,8 +35,15 @@ public class BattleManager : MonoBehaviour
         {ArmyType.ArmyA, null},
         {ArmyType.ArmyB, null}
     };
-    
+
+    void Awake()
+    {
+        _armyA = new UnitData[mainConfigSO.MAX_UNITS_PER_ARMY];
+        _armyB = new UnitData[mainConfigSO.MAX_UNITS_PER_ARMY];
+    }
+
     // getter
+
     public FormationConfigSO GetFormation(ArmyType army) => 
         _armyFormations.TryGetValue(army, out var f) ? f : null;
 

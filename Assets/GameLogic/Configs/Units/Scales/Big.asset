@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 74e229852d767f34e82f299aa47f8502, type: 3}
   m_Name: Big
   m_EditorClassIdentifier: Assembly-CSharp::ScaleConfigSO
+  HP_MOD: 108
+  ATK_MOD: 62
+  SPEED_MOD: -11
+  ATKSPD_MOD: -1
   DebugScaleId: SCALE_BIG
-  SCALE: 1.5
-  HP_MOD: 50
-  ATK_MOD: 0
-  SPEED_MOD: 0
-  ATKSPD_MOD: 0
+  SCALE: 1.4

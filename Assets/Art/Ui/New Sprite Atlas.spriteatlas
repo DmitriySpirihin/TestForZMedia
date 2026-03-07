@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: New Sprite Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 6fa215c06d459ad48a447bfd1c59906f, type: 3}
+    - {fileID: 2800000, guid: e83d15255737c314ebe22b29c3aab947, type: 3}
+    - {fileID: 2800000, guid: 6292a06e3571c3e48a6fa4356c04696d, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 6fa215c06d459ad48a447bfd1c59906f: 21300000
+    - e83d15255737c314ebe22b29c3aab947: 21300000
+    - 6292a06e3571c3e48a6fa4356c04696d: 2013261503205373015
+    - 6292a06e3571c3e48a6fa4356c04696d: -5402412272178277761
+    - 6292a06e3571c3e48a6fa4356c04696d: 7664807735657788756
+    - 6292a06e3571c3e48a6fa4356c04696d: 8894201953851282084
+    - 6292a06e3571c3e48a6fa4356c04696d: -7811504096720598664
+    - 6292a06e3571c3e48a6fa4356c04696d: 3760674464881954987
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 6fa215c06d459ad48a447bfd1c59906f, type: 3}
+  - {fileID: 21300000, guid: e83d15255737c314ebe22b29c3aab947, type: 3}
+  - {fileID: 2013261503205373015, guid: 6292a06e3571c3e48a6fa4356c04696d, type: 3}
+  - {fileID: -5402412272178277761, guid: 6292a06e3571c3e48a6fa4356c04696d, type: 3}
+  - {fileID: 7664807735657788756, guid: 6292a06e3571c3e48a6fa4356c04696d, type: 3}
+  - {fileID: 8894201953851282084, guid: 6292a06e3571c3e48a6fa4356c04696d, type: 3}
+  - {fileID: -7811504096720598664, guid: 6292a06e3571c3e48a6fa4356c04696d, type: 3}
+  - {fileID: 3760674464881954987, guid: 6292a06e3571c3e48a6fa4356c04696d, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - ArenaDeathPanel
+  - BaseMenuPanelEmpty
+  - Buttons_3
+  - Buttons_2
+  - Buttons_1
+  - Buttons_0
+  - Buttons_5
+  - Buttons_4
+  m_RenderDataMap: {}
+  m_Tag: New Sprite Atlas
+  m_IsVariant: 0

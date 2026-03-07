@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 6d5d69f5b473edc4aa4cecbfff44099c, type: 3}
   m_Name: Red
   m_EditorClassIdentifier: Assembly-CSharp::ColorConfigSO
-  DebugColorId: COLOR_RED
-  COLOR: {r: 1, g: 0.22327036, b: 0.22327036, a: 1}
   HP_MOD: 200
-  ATK_MOD: 40
-  SPEED_MOD: -9
-  ATKSPD_MOD: 0
+  ATK_MOD: 77
+  SPEED_MOD: -6
+  ATKSPD_MOD: -3
+  DebugColorId: COLOR_RED
+  COLOR: {r: 0.754717, g: 0.26818556, b: 0.26818556, a: 1}

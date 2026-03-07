@@ -7,6 +7,7 @@ public class ArmySpawner : MonoBehaviour
     [Inject] private UnitFactory _unitFactory;
     [Inject] private UnitCreator _unitCreator;
     [Inject] private BattleManager _battleManager;
+    [Inject] GameConfigSO mainConfigSO;
     
     [SerializeField] private Transform _armyAPosition;
     [SerializeField] private Transform _armyBPosition;
@@ -19,7 +20,7 @@ public class ArmySpawner : MonoBehaviour
         
         var formation = _battleManager.GetFormation(army);
          
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < mainConfigSO.MAX_UNITS_PER_ARMY; i++)
         {
             // offset from formation
             Vector2 offset = Vector2.zero;

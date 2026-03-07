@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 342435068892690468df607681904252, type: 3}
-  m_Name: CUBE
+  m_Name: CILYNDER
   m_EditorClassIdentifier: Assembly-CSharp::ShapeConfigSO
-  HP_MOD: 116
-  ATK_MOD: 48
-  SPEED_MOD: -4
-  ATKSPD_MOD: 1
-  DebugId: SHAPE_CUBE
-  SHAPE_PREFAB: {fileID: 8665736226348427527, guid: e562636a42536bc43802f1677c642903, type: 3}
+  HP_MOD: -94
+  ATK_MOD: 72
+  SPEED_MOD: 8
+  ATKSPD_MOD: -3
+  DebugId: SHAPE_CYLINDER
+  SHAPE_PREFAB: {fileID: 472370677871079239, guid: a4bddc0ed72f2064289837b0b7116e01, type: 3}
